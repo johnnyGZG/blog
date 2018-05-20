@@ -1,0 +1,23 @@
+Crear un proyecto de Laravel Nuevo
+	- laravel new nomAplicacion
+
+Crear Modelo con Migracion
+	- php artisan make:model NomModelSingular -m
+
+Ejecutar migraciones
+	- php artisan migrate
+
+Para Refrescar las migraciones (Deshace las migraciones anteriores y las vuelve a ejecutar)
+	- php artisan migrate:refresh
+
+Para Crear un Seeder (Datos para inicializar las Tablas de la Base de Datos)
+	- php artisan make:seeder NomTablaPluralTableSeeder
+
+Para Ejecutar los seeders
+	- php artisan db:seed
+
+Para Refrescar las Migraciones y Ejecutar los Seeders
+	- php artisan migrate:refresh --seed
+
+Para crear una tabla que tiene relaciones solamente con metodo completo para crear la tabla en la base de datos
+	php artisan make:migrate create_nomModeloUno_nomModeloDos_table --create=nomModeloUno_nomModeloDos
