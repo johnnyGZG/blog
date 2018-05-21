@@ -21,3 +21,23 @@ Para Refrescar las Migraciones y Ejecutar los Seeders
 
 Para crear una tabla que tiene relaciones solamente con metodo completo para crear la tabla en la base de datos
 	php artisan make:migrate create_nomModeloUno_nomModeloDos_table --create=nomModeloUno_nomModeloDos
+
+Para ver informacion de los comandos de artisan
+	php artisan -h nomComando ( php artisan -h make:auth )
+
+Crear sistema de autenticacion 
+	- Se recomienda ejecutar el comado antes de hacer modificaciones
+	- php artisan make:auth
+
+Clase de Laravel donde se almacena las rutas
+	- Illuminate\Routing (Se puede buscar en Sublime con Ctrl + P, y escribir Routing) 
+	- Las rutas de la autenticacion de laravel se encuentran en el metodo auth (En sublime se busca @auth) 
+	- Esta caso sirve para copiar las rutas de autenticacion del archivo y pegarlas en el archivo web para tener total control en estas rutas
+
+Para Buscar los archivos de traduccion de laravel 
+	- Dirigirse a config/app.php - variable locale
+	- https://github.com/caouecs/Laravel-lang/tree/master/src
+
+Para crear un controlador
+	- php artisan make:controller NombreController
+	- php artisan make:controller NomCarpeta/NomController

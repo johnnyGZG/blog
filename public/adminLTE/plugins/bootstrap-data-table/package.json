@@ -1,0 +1,59 @@
+{
+  "_from": "bootstrap-data-table",
+  "_id": "bootstrap-data-table@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-sZjxGooTVmx/yest7ok+Dcp3DsI=",
+  "_location": "/bootstrap-data-table",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "bootstrap-data-table",
+    "name": "bootstrap-data-table",
+    "escapedName": "bootstrap-data-table",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bootstrap-data-table/-/bootstrap-data-table-1.0.0.tgz",
+  "_shasum": "b198f11a8a13566c7fc9eb2dee893e0dca770ec2",
+  "_spec": "bootstrap-data-table",
+  "_where": "C:\\laragon\\www\\blog",
+  "author": {
+    "name": "Patric Gutersohn",
+    "email": "pguso@gmx.de",
+    "url": "http://gutersohn.biz/"
+  },
+  "bugs": {
+    "url": "https://github.com/pguso/bootstrap-data-table/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bootstrap": ">=3.0.0",
+    "jquery": ">=1.5"
+  },
+  "deprecated": false,
+  "description": "jQuery plugin for sorting, paginating and searching tables.",
+  "homepage": "https://github.com/pguso/bootstrap-data-table",
+  "keywords": [
+    "jquery-plugin",
+    "bootstrap",
+    "table",
+    "search"
+  ],
+  "license": "MIT",
+  "main": "index.html",
+  "name": "bootstrap-data-table",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pguso/bootstrap-data-table.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}
