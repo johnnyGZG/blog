@@ -7,7 +7,7 @@
       <span>Inicio</span>
     </a>
   </li>
-<li class="treeview {{ request()->is('admin/posts') ? 'active' : '' }}">
+<li class="treeview {{ request()->is('admin/posts*') ? 'active' : '' }}">
     <a href="#">
       <i class="fa fa-link"></i> 
       <span>Blog</span>
@@ -21,7 +21,11 @@
           Ver todos los posts
         </a>
       </li>
-      <li><a href="#">Crear un posts</a></li>
+      <li class="{{ request()->is('admin/posts/create') ? 'active' : '' }}">
+        <a href="{{ route('admin.posts.create') }}">
+          Crear un posts
+        </a>
+      </li>
     </ul>
   </li>
 </ul>
