@@ -66,7 +66,11 @@
 
                         <div class="form-group">
                             <label>Extracto publicación</label>
-                            <textarea rows="6" name="excerpt" class="form-control" placeholder="Ingrese aqui el extracto de la publicación"></textarea>
+                            <textarea name="excerpt" class="form-control" placeholder="Ingrese aqui el extracto de la publicación"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Guardar publicación</button>
                         </div>
                     </div>
                 </div>
