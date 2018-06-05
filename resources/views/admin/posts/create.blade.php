@@ -39,14 +39,34 @@
             <div class="col-md-4">
                 <div class="box box-primary">
                     <div class="box-body">
+
+                        <!-- Date -->
                         <div class="form-group">
-                            <label>Extracto publicación</label>
-                            <input type="date" name="published_at" class="form-control" />
+                            <label>Date:</label>
+                
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" id="datepicker">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
+
+                        <div class="form-group">
+                            <label>Categorias</label>
+                            <select name="body" class="form-control" >
+                                <option vakue="">Selecione una categoria</option>
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label>Extracto publicación</label>
-                            <textarea rows="10" name="excerpt" class="form-control" placeholder="Ingrese aqui el extracto de la publicación"></textarea>
+                            <textarea rows="6" name="excerpt" class="form-control" placeholder="Ingrese aqui el extracto de la publicación"></textarea>
                         </div>
                     </div>
                 </div>
@@ -55,3 +75,20 @@
     </div>
 
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('adminLTE/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+@endpush
+
+@push('scripts')
+
+    <!-- bootstrap datepicker -->
+    <script src="{{ asset('adminLTE/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
+    <script>
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        });
+    </script>
+@endpush

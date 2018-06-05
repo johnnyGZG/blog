@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "bootstrap-data-table": "^1.0.0",
+        "bootstrap-datepicker": "^1.8.0",
         "font-awesome": "^4.7.0"
     }
 }

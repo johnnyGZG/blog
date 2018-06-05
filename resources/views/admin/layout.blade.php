@@ -8,14 +8,14 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('adminLTE/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('adminLTE/plugins/bootstrap-data-table/css/jquery.bdt.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('adminLTE/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ asset('adminLTE/css/skins/skin-blue.min.css') }}">
+
+  @stack('styles')
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -350,13 +350,12 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('adminLTE/bootstrap/js/bootstrap.min.js') }}"></script>
 
-<script src="{{ asset('adminLTE/plugins/bootstrap-data-table/js/vendor/jquery.sortelements.js') }}"></script>
-<script src="{{ asset('adminLTE/plugins/bootstrap-data-table/js/jquery.bdt.min.js') }}" ></script>
-
 <!-- AdminLTE App -->
 <script src="{{ asset('adminLTE/js/adminlte.min.js') }}"></script>
 
 @yield('before_script')
+
+@stack('scripts')
 
 </body>
 </html>

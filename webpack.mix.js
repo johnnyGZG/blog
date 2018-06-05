@@ -12,7 +12,8 @@ let mix = require('laravel-mix');
  */
 
 mix.copyDirectory('node_modules/bootstrap/dist','public/adminLTE/bootstrap')
-	.copyDirectory('node_modules/bootstrap-data-table','public/adminLTE/plugins/bootstrap-data-table');
+    .copyDirectory('node_modules/bootstrap-data-table','public/adminLTE/plugins/bootstrap-data-table')
+    .copyDirectory('node_modules/bootstrap-datepicker','public/adminLTE/plugins/bootstrap-datepicker');
 
 mix.copy('node_modules/jquery/dist/jquery.min.js','public/js');
 

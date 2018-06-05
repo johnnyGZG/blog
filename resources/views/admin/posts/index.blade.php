@@ -57,6 +57,16 @@
 
 @endsection
 
+@push('styles')
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('adminLTE/plugins/bootstrap-data-table/css/jquery.bdt.min.css') }}">
+@endpush
+
+@push('scripts')
+	<script src="{{ asset('adminLTE/plugins/bootstrap-data-table/js/vendor/jquery.sortelements.js') }}"></script>
+	<script src="{{ asset('adminLTE/plugins/bootstrap-data-table/js/jquery.bdt.min.js') }}" ></script>
+@endpush
+
 @section('before_script')
 
 	<script>
