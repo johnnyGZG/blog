@@ -30,7 +30,7 @@
 
                         <div class="form-group">
                             <label>Descripción de la publicación</label>
-                            <textarea rows="10" name="body" class="form-control" placeholder="Ingrese aqui la descripción de la publicación"></textarea>
+                            <textarea id="editor" rows="10" name="body" class="form-control" placeholder="Ingrese aqui la descripción de la publicación"></textarea>
                         </div>
                     </div>
                 </div>
@@ -65,6 +65,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Etiquetas</label>
+                            <select class="form-control select2" 
+                                    multiple="multiple" 
+                                    data-placeholder="Seleccione una o mas etiquetas"
+                                    style="width: 100%;">
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>Extracto publicación</label>
                             <textarea name="excerpt" class="form-control" placeholder="Ingrese aqui el extracto de la publicación"></textarea>
                         </div>
@@ -82,17 +94,36 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2/dist/css/select2.min.css') }}">
 @endpush
 
 @push('scripts')
 
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/classic/ckeditor.js"></script>
     <!-- bootstrap datepicker -->
     <script src="{{ asset('adminLTE/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('adminLTE/plugins/select2/dist/js/select2.full.min.js') }}"></script>
 
     <script>
         //Date picker
         $('#datepicker').datepicker({
             autoclose: true
         });
+
+        //Initialize Select2 Elements
+        $('.select2').select2()
+        
+        ClassicEditor
+			.create( document.querySelector( '#editor' ) )
+			.then( editor => {
+				console.log( editor );
+			} )
+			.catch( error => {
+				console.error( error );
+            } );
+                
     </script>
 @endpush
