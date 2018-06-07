@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -19,5 +20,13 @@ class Post extends Model
     {
     	// Un Post Posee varios Tags
     	return $this->belongsToMany(Tag::class);
+    }
+
+    // Definicion de query scope 
+    // siempre debe de iniciar con scopeNombreFuncion($query)
+    public function scopePublished($query){
+        $query->whereNotNull('published_at') // Verifica si es nulo o no - en caso de ser nulo omite el registro
+                        ->where('published_at','<=',Carbon::now() ) // Post publicados hasta la fecha actual
+                        ->latest('published_at');
     }
 }

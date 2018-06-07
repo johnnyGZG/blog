@@ -9,7 +9,10 @@ use App\Post;
 class PagesController extends Controller
 {
     public function home(){
-    	$posts = Post::latest('published_at')->get();
+        // Asi se realiza una query scope desde el modelo
+        // Sirve para lister resultados que siempre van a ser iguales
+        $posts = Post::Published()->get();
+        
     	return view('welcome', compact('posts'));
     }
 }
