@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'PagesController@home')->name('pages');
+Route::get('blog/{id}', 'PostController@show')->name('show');
 
 Route::group([
 	'prefix' => 'admin', 
