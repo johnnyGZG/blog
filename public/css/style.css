@@ -267,7 +267,16 @@ a.btn-bar{
           right: 7px;
           
       }
-      
-      
+	  
+.buttons-social-media-share .share-buttons{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.buttons-social-media-share .share-buttons li{
+	float: left;
+	margin: 1rem .5rem;
+}
 
 

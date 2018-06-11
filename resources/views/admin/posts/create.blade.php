@@ -36,7 +36,7 @@
 
                         <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
                             <label>Descripción de la publicación</label>
-                            <textarea id="editor" rows="10" name="body" class="form-control" placeholder="Ingrese aqui la descripción de la publicación">{{ old('body') }} </textarea>
+                            <textarea id="editor" rows="10" name="body" class="form-control" placeholder="Ingrese aqui la descripción de la publicación">{{ old('body') }}</textarea>
                             {!! $errors->first('body', '<span class="help-block">:message</span>') !!}
                         </div>
                     </div>
