@@ -26,6 +26,24 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, ['title' => 'required']);
+
+        $post = Post::create([
+            'title' => $request->get('title'),
+            'url' => str_slug($request->get('title'))
+        ]);
+
+        // Se redirige a la vista de edicion con la informacion del post recien creado
+        return redirect()->route('admin.posts.edit', $post);
+    }
+
+    public function edit(Post $post)
+    {
+        return view('admin.posts.edit', compact('post'));
+    }
+
+    /* public function store(Request $request)
+    {
         // Validacion
 
         $this->validate($request, [
@@ -52,5 +70,5 @@ class PostsController extends Controller
 
         $post->tags()->attach($request->get('tags'));
         return back()->with('flash', 'Tu publicación ha sido creada');
-    }
+    } */
 }
