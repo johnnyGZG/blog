@@ -21,8 +21,8 @@
           Ver todos los posts
         </a>
       </li>
-      <li class="{{ request()->is('admin/posts/create') ? 'active' : '' }}">
-        <a href="{{ route('admin.posts.create') }}">
+      <li>
+        <a href="#" data-toggle="modal" data-target="#exampleModal">
           Crear un posts
         </a>
       </li>

@@ -17,12 +17,12 @@ class PostsController extends Controller
     	return view('admin.posts.index', compact('posts'));
     }
 
-    public function create(){
+    /* public function create(){
 
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.posts.create', compact('categories', 'tags'));
-    }
+    } */
 
     public function store(Request $request)
     {
@@ -39,10 +39,12 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
     }
 
-    /* public function store(Request $request)
+    public function update(Post $post, Request $request)
     {
         // Validacion
 
@@ -57,7 +59,7 @@ class PostsController extends Controller
 
         // dd($request->filled('published_at'));
 
-        $post = new Post;
+        // $post = new Post;
         $post->title = $request->get('title');
         $post->url = str_slug($request->get('title'));
         $post->body = $request->get('body');
@@ -66,9 +68,11 @@ class PostsController extends Controller
         $post->category_id = $request->get('category');
         $post->save();
 
-        // etiquetas
+        // etiquetas en formato Array
 
-        $post->tags()->attach($request->get('tags'));
-        return back()->with('flash', 'Tu publicación ha sido creada');
-    } */
+        // Para evitar duplicacion de datos al actualizar - sync
+        // Cuando se inserta un nuevo regitro sin actualizar - attach
+        $post->tags()->sync($request->get('tags'));
+        return back()->with('flash', 'Tu publicación ha sido guardada');
+    }
 }
