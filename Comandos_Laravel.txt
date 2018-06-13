@@ -41,3 +41,6 @@ Para Buscar los archivos de traduccion de laravel
 Para crear un controlador
 	- php artisan make:controller NombreController
 	- php artisan make:controller NomCarpeta/NomController
+
+Para crear modelo, migracion y controlador en conjunto
+	- php artisan make:model Photo -mc

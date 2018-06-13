@@ -101,6 +101,10 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="dropzone"></div>
+                        </div>
+
+                        <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Guardar publicación</button>
                         </div>
                     </div>
@@ -112,6 +116,10 @@
 @endsection
 
 @push('styles')
+
+    <!-- Dropzone -->
+    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/select2/dist/css/select2.min.css') }}">
@@ -119,6 +127,8 @@
 
 @push('scripts')
 
+    <!-- Dropzone -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.js"></script>
     <!-- CK Editor -->
     <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/classic/ckeditor.js"></script>
     <!-- bootstrap datepicker -->
@@ -143,6 +153,17 @@
 			.catch( error => {
 				console.error( error );
             } );
+
+        // http://www.dropzonejs.com/#configuration-options - Opciones de configuracion
+        new Dropzone('.dropzone', {
+            url: '/admin/posts/{{ $post->url }}/photos',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            dictDefaultMessage: 'Arrastre las fotos aqui para subirlas'
+        });
+
+        Dropzone.autoDiscover = false;
                 
     </script>
 @endpush
