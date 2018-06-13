@@ -73,6 +73,6 @@ class PostsController extends Controller
         // Para evitar duplicacion de datos al actualizar - sync
         // Cuando se inserta un nuevo regitro sin actualizar - attach
         $post->tags()->sync($request->get('tags'));
-        return back()->with('flash', 'Tu publicación ha sido guardada');
+        return redirect()->route('admin.posts.edit', $post)->with('flash', 'Tu publicación ha sido guardada');
     }
 }
