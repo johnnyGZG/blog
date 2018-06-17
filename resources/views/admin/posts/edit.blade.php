@@ -155,12 +155,22 @@
             } );
 
         // http://www.dropzonejs.com/#configuration-options - Opciones de configuracion
-        new Dropzone('.dropzone', {
+        var myDropzone = new Dropzone('.dropzone', {
             url: '/admin/posts/{{ $post->url }}/photos',
+            acceptedFiles: 'image/*', // Para que Dropzone solo acepte imagenes
+            maxFilesize: 2, // Para definir tamaño maximo del archivo
+            paramName: 'photo',
+            maxFiles: 20, // limitar el numero de images asubir
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             dictDefaultMessage: 'Arrastre las fotos aqui para subirlas'
+        });
+        
+        // mostrar errores del servidor
+        myDropzone.on('error', function(file, res){
+            var msg = res.errors.photo[0];
+            $('.dz-error-message:last > span').html(msg);
         });
 
         Dropzone.autoDiscover = false;

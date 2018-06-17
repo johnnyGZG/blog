@@ -11,6 +11,10 @@ class PhotosController extends Controller
 {
     public function store(Post $post)
     {
-        return 'Procesando Imagen .....';
+        $this->validate(request(), [
+            'photo' => 'required|image|max:2048' // jpeg, png, bmp, gif, svg
+        ]);
+
+        return request()->file('photo');
     }
 }
