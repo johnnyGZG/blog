@@ -34,6 +34,12 @@ class Post extends Model
     	return $this->belongsToMany(Tag::class);
     }
 
+    public function photos()
+    {
+        // Un Post Posee Varias imagenes
+        return $this->hasMany(Photo::class);
+    }
+
     // Definicion de query scope 
     // siempre debe de iniciar con scopeNombreFuncion($query)
     public function scopePublished($query){
