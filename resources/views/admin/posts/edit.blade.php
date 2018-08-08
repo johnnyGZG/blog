@@ -111,6 +111,27 @@
                 </div>
             </div>
         </form>
+
+        <div class="col-md-8">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="row">
+                        @foreach($post->photos as $photo)
+                            <form method="POST" action="{{ route('admin.photos.destroy', $photo) }}">
+                                @csrf
+                                @method('DELETE')
+                                <div class="col-md-2">
+                                    <button class="btn btn-danger btn-xs" style="position: absolute;">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                    <img class="img-responsive" src="{{ $photo->url }}" />
+                                </div>
+                            </form>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection
