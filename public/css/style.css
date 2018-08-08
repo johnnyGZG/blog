@@ -296,4 +296,12 @@ a.btn-bar{
 	overflow: hidden;
 }
 
+.post.container{
+	padding: 0;
+}
+
+.carousel-inner .carousel-item{
+	width: 100%;
+}
+
 

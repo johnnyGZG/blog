@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+    @stack('styles')
+    
 </head>
 <body>
     <div class="preload"></div>
@@ -59,6 +62,6 @@
     </section>
 
     @stack('scripts')
-    
+
 </body>
 </html>
