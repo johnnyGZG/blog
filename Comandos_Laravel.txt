@@ -44,3 +44,7 @@ Para crear un controlador
 
 Para crear modelo, migracion y controlador en conjunto
 	- php artisan make:model Photo -mc
+
+
+Para crear los archivos de paginacion que trae laravel
+	- php artisan vendor:publish --tag=laravel-pagination
