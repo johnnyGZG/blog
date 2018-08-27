@@ -64,6 +64,12 @@
                             <textarea id="editor" rows="10" name="body" class="form-control" placeholder="Ingrese aqui la descripción de la publicación">{{ old('body', $post->body) }}</textarea>
                             {!! $errors->first('body', '<span class="help-block">:message</span>') !!}
                         </div>
+
+                        <div class="form-group {{ $errors->has('iframe') ? 'has-error' : '' }}">
+                            <label>Multimedia de la publicación</label>
+                            <textarea id="editor" rows="2" name="iframe" class="form-control" placeholder="Ingrese aqui multimedia de la publicación (uadio o video)">{{ old('iframe', $post->iframe) }}</textarea>
+                            {!! $errors->first('iframe', '<span class="help-block">:message</span>') !!}
+                        </div>
                     </div>
                 </div>
             </div>
