@@ -47,4 +47,14 @@ class Post extends Model
                         ->where('published_at','<=',Carbon::now() ) // Post publicados hasta la fecha actual
                         ->latest('published_at');
     }
+
+    // Mutador
+    // Metodo que se ejecuta antes de Guardar o Modificar un Modelo
+    public function setTitleAttribute($title)
+    {
+        // Valor que se quiere modificar
+       $this->attributes['title'] = $title;
+
+       $this->attributes['url'] = str_slug($title); // Guarda el nombre sin espacios y sin caracteres especiales
+    }
 }

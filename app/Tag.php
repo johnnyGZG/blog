@@ -13,12 +13,22 @@ class Tag extends Model
     public function getRouteKeyName()
     {
         // Campo por el que se quiere encontar el dato del modelo
-        return 'name';
+        return 'url';
     }
 
     public function posts()
     {
         // Una Etiqueta tiene muchos Posts
         return $this->belongsToMany(Post::class);
+    }
+
+    // Mutador
+    // Metodo que se ejecuta antes de Guardar o Modificar un Modelo
+    public function setNameAttribute($name)
+    {
+        // Valor que se quiere modificar
+       $this->attributes['name'] = $name;
+
+       $this->attributes['url'] = str_slug($name); // Guarda el nombre sin espacios y sin caracteres especiales
     }
 }

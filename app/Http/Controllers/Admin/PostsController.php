@@ -28,10 +28,7 @@ class PostsController extends Controller
     {
         $this->validate($request, ['title' => 'required']);
 
-        $post = Post::create([
-            'title' => $request->get('title'),
-            'url' => str_slug($request->get('title'))
-        ]);
+        $post = Post::create( $request->only('title') ); // Solo trae el atributo 'title' y los demas los ignora
 
         // Se redirige a la vista de edicion con la informacion del post recien creado
         return redirect()->route('admin.posts.edit', $post);
@@ -61,7 +58,7 @@ class PostsController extends Controller
 
         // $post = new Post;
         $post->title = $request->get('title');
-        $post->url = str_slug($request->get('title'));
+        // $post->url = str_slug($request->get('title')); - ya no se necesita por el mutador definido en el modelo post
         $post->body = $request->get('body');
         $post->iframe = $request->get('iframe');
         $post->excerpt = $request->get('excerpt');
