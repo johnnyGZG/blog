@@ -62,15 +62,34 @@ class PostsController extends Controller
         $post->body = $request->get('body');
         $post->iframe = $request->get('iframe');
         $post->excerpt = $request->get('excerpt');
-        $post->published_at = $request->filled('published_at') ? Carbon::parse($request->get('published_at')) : null; // Convierte formato fecha que se requiere
-        $post->category_id = $request->get('category');
+
+        $post->published_at = $request->filled('published_at') 
+                                ? Carbon::parse($request->get('published_at')) 
+                                : null; // Convierte formato fecha que se requiere
+        
+        // Se crea una categoria si no existe
+        // Si se manda un string la crea si manda un id ignora el caso
+        $post->category_id = Category::find($cat = $request->get('category'))
+                                ? $cat
+                                : Category::create(['name' => $cat])->id;
         $post->save();
+
+        $tags = [];
+        
+        // Recorre los tags y si uno de ellos no existe se crea automaticamente
+        foreach($request->get('tags') as $tag)
+        {
+            $tags[] = Tag::find($tag)
+                        ? $tag
+                        : Tag::create(['name' => $tag])->id;
+        }
 
         // etiquetas en formato Array
 
         // Para evitar duplicacion de datos al actualizar - sync
         // Cuando se inserta un nuevo regitro sin actualizar - attach
-        $post->tags()->sync($request->get('tags'));
+        // $post->tags()->sync($request->get('tags'));
+        $post->tags()->sync($tags);
         return redirect()->route('admin.posts.edit', $post)->with('flash', 'Tu publicación ha sido guardada');
     }
 }

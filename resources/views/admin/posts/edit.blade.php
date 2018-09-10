@@ -98,7 +98,7 @@
 
                         <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
                             <label>Categorias</label>
-                            <select name="category" class="form-control" >
+                            <select name="category" class="form-control select2" >
                                 <option vakue="">Selecione una categoria</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}"
@@ -173,7 +173,9 @@
         });
 
         //Initialize Select2 Elements
-        $('.select2').select2()
+        $('.select2').select2({
+            tags: true
+        });
         
         ClassicEditor
 			.create( document.querySelector( '#editor' ) )

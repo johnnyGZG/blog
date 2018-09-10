@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    // Desactiva el almacenamiento masivo -- se utiliza cuando los datos bienen como un array
+    protected $guarded = [];
+    
     // Al definir este metodo se esta sobreescribiendo el metodo de eloquent de laravel
     // Esta funcion en el modelo, sirve para cambiar el parametro de busqueda de los datos
     // por defecto laravel busca por id, pero con este metodo se puede encontrar un post por el nombre
