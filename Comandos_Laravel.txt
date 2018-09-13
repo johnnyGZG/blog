@@ -48,3 +48,6 @@ Para crear modelo, migracion y controlador en conjunto
 
 Para crear los archivos de paginacion que trae laravel
 	- php artisan vendor:publish --tag=laravel-pagination
+
+Para crear archivo de validacion de campos de formulario
+	- php artisan make:request NombreValidacionRequest

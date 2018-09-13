@@ -10,7 +10,10 @@ class Post extends Model
 	// Convertir Fechas Diferentes a Formato Carbon
     protected $dates = ['published_at'];
 
-    protected $guarded = [];
+    // Se definen los datos que solo se pueden modificar, si hay mas se ignoran
+    protected $fillable = [
+        'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id'
+    ];
 
     // Al definir este metodo se esta sobreescribiendo el metodo de eloquent de laravel
     // Esta funcion en el modelo, sirve para cambiar el parametro de busqueda de los datos
@@ -56,5 +59,32 @@ class Post extends Model
        $this->attributes['title'] = $title;
 
        $this->attributes['url'] = str_slug($title); // Guarda el nombre sin espacios y sin caracteres especiales
+    }
+
+    // Mutador
+    // Metodo que se ejecuta antes de Guardar o Modificar un Modelo
+    public function setPublishedAtAttribute($published_at)
+    {
+        // Valor que se quiere modificar
+       $this->attributes['published_at'] = $published_at ? Carbon::parse($published_at) : null; // Convierte formato fecha que se requiere;
+    }
+
+    // Mutador
+    // Metodo que se ejecuta antes de Guardar o Modificar un Modelo
+    public function setCategoryIdAttribute($category)
+    {
+        // Valor que se quiere modificar
+       $this->attributes['category_id'] = Category::find($category)
+                                            ? $category
+                                            : Category::create(['name' => $category])->id;
+    }
+
+    public function syncTags($tags)
+    {
+        $tagIds = collect($tags)->map(function($tag){
+            return Tag::find($tag) ? $tag : Tag::create(['name' => $tag])->id;
+        });
+
+        return $this->tags()->sync($tagIds);
     }
 }
