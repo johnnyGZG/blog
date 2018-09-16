@@ -5,6 +5,7 @@ use App\Post;
 use App\Category;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class PostsTableSeeder extends Seeder
 {
@@ -15,6 +16,10 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
+        // Cuando se ejecute el --seed se eliminara la carpeta ubicada en el disco 'public' configuracion ubicada en 'config/filesystem.php'
+        // no olvidar importar -- use Illuminate\Support\Facades\Storage;
+        Storage::disk('public')->deleteDirectory('posts');
+
     	// Limpia la tabla e inserta el registro
     	Post::truncate();
 
