@@ -10,6 +10,25 @@ class Post extends Model
 	// Convertir Fechas Diferentes a Formato Carbon
     protected $dates = ['published_at'];
 
+    // Sobrescribiendo metodo de eloquent
+    protected static function boot()
+    {
+        // se coloca esta linea primero
+        parent::boot();
+
+        // Cuando se llame el metodo Eloquent ->delete() en el controlador ejecuta esta funcion
+        // cuando se desee eliminar un post tambien eliminara las relaciones de las otras tabals involucradas
+        static::deleting(function($post){
+
+            // Elimina todos los Tags que esten relacionadas con el posts a eliminar
+            // El metodo '->detach()' se encarga de ello
+            $post->tags()->detach(); 
+
+            // Forma mas abreviada para el 'each'
+            $post->photos->each->delete();
+        });
+    }
+
     // Se definen los datos que solo se pueden modificar, si hay mas se ignoran
     protected $fillable = [
         'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id'

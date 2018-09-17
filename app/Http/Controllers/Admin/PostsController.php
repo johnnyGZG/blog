@@ -102,6 +102,41 @@ class PostsController extends Controller
         // Cuando se inserta un nuevo regitro sin actualizar - attach
         // $post->tags()->sync($request->get('tags'));
         // $post->tags()->sync($tags);
-        return redirect()->route('admin.posts.edit', $post)->with('flash', 'Tu publicación ha sido guardada');
+        return redirect()
+                ->route('admin.posts.edit', $post)
+                ->with('flash', 'La publicación ha sido guardada');
+    }
+
+    // Eliminar el posts y las realciones en las diferentes tablas
+    public function destroy(Post $post)
+    {
+        // Elimina todos los Tags que esten relacionadas con el posts a eliminar
+        // El metodo '->detach()' se encarga de ello
+        // $post->tags()->detach(); 
+
+        // de esta forma se eliminaria las fotos de la base de adtos pero no del servidor
+        // $post->photos()->delete();
+
+        // de esta forma se borrarian las fotos tanto de la base de datos como del servidor
+        // se debe iterar a cada foto para acceder al servidor
+        /* foreach($post->photos as $photo)
+        {
+            $photo->delete();
+        } */
+
+        // Otra forma para recorrelo es de forma de coleccion con el metodo 'each'
+        /* $post->photos->each(function($photo){
+            $photo->delete();
+        }); */
+
+        // Forma mas abreviada para el 'each'
+        $post->photos->each->delete();
+
+        // Elimina la informacion del post -- ->delete() es un metodo de Eloquent
+        $post->delete();
+
+        return redirect()
+                ->route('admin.posts.index')
+                ->with('flash', 'La publicación ha sido eliminada');
     }
 }
