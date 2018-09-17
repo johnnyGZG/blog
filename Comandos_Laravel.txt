@@ -51,3 +51,10 @@ Para crear los archivos de paginacion que trae laravel
 
 Para crear archivo de validacion de campos de formulario
 	- php artisan make:request NombreValidacionRequest
+
+Para actualizar laravel 
+	- Se debe de actualizar de version en version por orden, '5.4 a la 5.5 despues a la 5.6 , etc'
+	- Realizar backup y revisar que el status del git este al dia
+	- Ir a la documentacion de laravel y seguir los pasos 'https://laravel.com/docs/5.7/upgrade', (link depende a la version que va a actualizar)
+	- Antes de seguir los pasos es recomendable ejecuta primero estos comandos para evitar posibles errores al actualizar el aplicativo
+		-> 'composer self-update': actualizar composer
