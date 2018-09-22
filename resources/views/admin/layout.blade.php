@@ -357,9 +357,12 @@
 
 @yield('before_script')
 
-@stack('scripts')
+{{-- condicion para que el script solo este disponoble en la url definida --}}
+@unless(request()->is('admin/posts/*'))
+  @include('admin.posts.create')
+@endunless
 
-@include('admin.posts.create')
+@stack('scripts')
 
 </body>
 </html>

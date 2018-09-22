@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form method="POST" action="{{ route('admin.posts.store') }}">
+    <form method="POST" action="{{ route('admin.posts.store', '#create') }}">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -19,8 +19,9 @@
                         <input  type="text" 
                                         name="title"
                                         value="{{ old('title') }}" 
+                                        id="title-post"
                                         class="form-control" 
-                                        placeholder="Ingrese aqui el titulo de la publicación" required />
+                                        placeholder="Ingrese aqui el titulo de la publicación" autofocus required />
                         {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
                 </div>
 
@@ -33,3 +34,33 @@
     </form>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        // 'window.location.hash' - sirve para seleccionar el has que trae la url en el momento
+        if( window.location.hash === '#create')
+        {
+        $('#exampleModal').modal('show');
+        }
+
+        // Metodo que se llama cuando se da click en el boton cerrar de la modal
+        // estos metodos son de boostrap
+        $('#exampleModal').on('hide.bs.modal', function(){
+        window.location.hash = '#';
+        });
+
+        // Metodo que se llama cuando se muestra la modal
+        // estos metodos son de boostrap
+        /* $('#exampleModal').on('show.bs.modal', function(){
+        $('#title-post').focus();
+        window.location.hash = '#create';
+        }); */
+
+        // Metodo que se invoca despues de llamar el modal muestra la modal
+        // estos metodos son de boostrap
+        $('#exampleModal').on('shown.bs.modal', function(){
+        $('#title-post').focus();
+        window.location.hash = '#create';
+        });
+  </script>
+@endpush
