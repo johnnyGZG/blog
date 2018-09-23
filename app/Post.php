@@ -70,15 +70,61 @@ class Post extends Model
                         ->latest('published_at');
     }
 
+    // Se sobrescribe el metodo create
+    public static function create(array $attributes = [])
+    {
+        // Devuelve el dato recien creado
+        $post = static::query()->create($attributes);
+
+        // funcion encargada de guardar el post con sus repectivas modificaciones internas
+        $post->generateUrl();
+
+        // se retorna el dato creado
+        return $post;
+    }
+
+    public function generateUrl()
+    {
+        // Se genera la url amigable
+        // Se puede acceder a cualquier dato del modelo utilizando - $this
+        $url = str_slug($this->title);
+
+        // Se encarga de verificar la existencia de un registro, -- devuelve True si hay de lo contrario False
+        if($this->whereUrl($url)->exists())
+        {
+            // Se concatena el nombre del titulo y el id del post para que la url sea unica
+            $url = "{$url}-{$this->id}";
+        }
+        
+        $this->url = $url;
+
+        // Se guarda el Dato
+        $this->save();
+    }
+
     // Mutador
     // Metodo que se ejecuta antes de Guardar o Modificar un Modelo
-    public function setTitleAttribute($title)
-    {
+    // public function setTitleAttribute($title)
+    // {
         // Valor que se quiere modificar
-       $this->attributes['title'] = $title;
+        // $this->attributes['title'] = $title;
+        
+        // $url = str_slug($title);
 
-       $this->attributes['url'] = str_slug($title); // Guarda el nombre sin espacios y sin caracteres especiales
-    }
+        // Comprobar existencia de un valor
+        // $duplicateUrlCount = Post::where('url', 'LIKE', "{$url}%")->exists();
+
+        // Si devuelve registros da true de lo contrario false
+        // $duplicateUrlCount = Post::where('url', 'LIKE', "{$url}%")->count();
+        
+        // if($duplicateUrlCount)
+        // {
+            // Para pasar un id unico se pasa la funcion - uniqid();
+            // $url .= "-" . ++$duplicateUrlCount;
+        // }
+
+        // $this->attributes['url'] = str_slug($title); // Guarda el nombre sin espacios y sin caracteres especiales
+    // }
 
     // Mutador
     // Metodo que se ejecuta antes de Guardar o Modificar un Modelo
@@ -91,7 +137,7 @@ class Post extends Model
     // Mutador
     // Metodo que se ejecuta antes de Guardar o Modificar un Modelo
     public function setCategoryIdAttribute($category)
-    {
+    { 
         // Valor que se quiere modificar
        $this->attributes['category_id'] = Category::find($category)
                                             ? $category
