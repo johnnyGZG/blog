@@ -58,3 +58,6 @@ Para actualizar laravel
 	- Ir a la documentacion de laravel y seguir los pasos 'https://laravel.com/docs/5.7/upgrade', (link depende a la version que va a actualizar)
 	- Antes de seguir los pasos es recomendable ejecuta primero estos comandos para evitar posibles errores al actualizar el aplicativo
 		-> 'composer self-update': actualizar composer
+
+Para volver a leer el archivo composer.json para aplicar cambios al proyecto
+	- composer dumpautoload -o

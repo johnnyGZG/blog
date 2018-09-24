@@ -10,9 +10,24 @@ class PagesController extends Controller
 {
     public function home(){
         // Asi se realiza una query scope desde el modelo
-        // Sirve para lister resultados que siempre van a ser iguales
+        // Sirve para listar resultados que siempre van a ser iguales
         $posts = Post::Published()->paginate();
         
-    	return view('welcome', compact('posts'));
+    	return view('pages.home', compact('posts'));
+    }
+
+    public function about()
+    {
+        return view('pages.about');
+    }
+
+    public function archive()
+    {
+        return view('pages.archive');
+    }
+
+    public function contact()
+    {
+        return view('pages.contact');
     }
 }
