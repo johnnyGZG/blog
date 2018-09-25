@@ -70,6 +70,13 @@ class Post extends Model
                         ->latest('published_at');
     }
 
+    public function isPublished()
+    {
+        // si tiene una fecha de publicacion definida y si en menor al dia actual devuelve true de lo contario false
+        // today() -- devuelve el dia actual 
+        return ! is_null($this->published_at) && $this->published_at < today();
+    }
+
     // Se sobrescribe el metodo create
     public static function create(array $attributes = [])
     {
