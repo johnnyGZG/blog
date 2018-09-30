@@ -31,7 +31,7 @@ class Post extends Model
 
     // Se definen los datos que solo se pueden modificar, si hay mas se ignoran
     protected $fillable = [
-        'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id'
+        'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id'
     ];
 
     // Al definir este metodo se esta sobreescribiendo el metodo de eloquent de laravel
@@ -60,6 +60,12 @@ class Post extends Model
     {
         // Un Post Posee Varias imagenes
         return $this->hasMany(Photo::class);
+    }
+
+    public function owner()
+    {
+        // Un Post Pertenece a un usuario
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Definicion de query scope 

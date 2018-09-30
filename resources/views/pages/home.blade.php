@@ -31,7 +31,11 @@
                 <header class="container-flex space-between">
                     <div class="date">
                         {{-- Otra Opcion de Formato diffForHumans() --}}
-                        <span class="c-gray-1">{{ $post->published_at->Format('M d') }}</span>
+                        <span class="c-gray-1">
+                            {{ $post->published_at->Format('M d') }}
+                            /
+                            {{ $post->owner->name }}
+                        </span>
                     </div>
                     <div class="post-category">
                         <span class="category text-capitalize">

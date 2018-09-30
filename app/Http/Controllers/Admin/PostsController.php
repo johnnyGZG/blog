@@ -29,7 +29,12 @@ class PostsController extends Controller
     {
         $this->validate($request, ['title' => 'required|min:3']);
 
-        $post = Post::create( $request->only('title') ); // Solo trae el atributo 'title' y los demas los ignora
+        // $post = Post::create( $request->only('title') ); // Solo trae el atributo 'title' y los demas los ignora
+
+        $post = Post::create([
+            'title' => $request->get('title'),
+            'user_id' => auth()->id() // devuelve el id del usurio autenticado
+        ]);
 
         // Se redirige a la vista de edicion con la informacion del post recien creado
         return redirect()->route('admin.posts.edit', $post);

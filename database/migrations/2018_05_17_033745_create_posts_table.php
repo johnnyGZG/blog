@@ -31,6 +31,8 @@ class CreatePostsTable extends Migration
 
             $table->unsignedInteger('category_id')->nullable();
 
+            $table->unsignedInteger('user_id');
+
             $table->timestamps();
 
         });
