@@ -7,28 +7,20 @@
 @section('content')
 
     <article class="post container">
+
         @if($post->photos->count() === 1)
-                <figure><img src="{{ url($post->photos->first()->url) }}" alt="" class="img-responsive"></figure>
+            @include('posts.photo')
         @elseif($post->photos->count() > 1)
             @include('posts.carousel')
         @elseif($post->iframe)
-            <div class="video">
-                {!! $post->iframe !!}
-            </div>
+            @include('posts.iframe')
         @endif
+        
         <div class="content-post">
-        <header class="container-flex space-between">
-            <div class="date">
-            {{-- el helper optional permite que los valores se muestren nulos asi se este haciendo una operacion para que no de error --}}
-            <span class="c-gris">{{ optional($post->published_at)->format('M d') }}</span>
-            </div>
-            @if($post->category)
-            <div class="post-category">
-                <span class="category">{{ optional($post->category)->name }}</span>
-            </div>
-            @endif
-        </header>
-        <h1>{{ $post->title }}</h1>
+
+            @include('posts.header')
+
+            <h1>{{ $post->title }}</h1>
             <div class="divider"></div>
             <div class="image-w-text">
                 {!! $post->body !!}
@@ -38,11 +30,8 @@
             
             @include('partials.social-links', ['description' => $post->title])
 
-            <div class="tags container-flex">
-                    @foreach($post->tags as $tag)
-                    <span class="tag c-gris text-capitalize">#{{ $tag->name }}</span>
-                    @endforeach
-            </div>
+            @include('posts.tags')
+
         </footer>
         <div class="comments">
         <div class="divider"></div>
