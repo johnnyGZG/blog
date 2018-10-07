@@ -10,14 +10,18 @@
         @foreach($posts as $post)
         <article class="post">
 
-            @if($post->photos->count() === 1)
+            {{-- Aplicando polimorfismo de vistas --}}
+            {{-- Se tiene que llamar un metodo creado desde el modelo --}}
+            @include( $post->viewType('home') )
+
+            {{-- @if($post->photos->count() === 1)
                 @include('posts.photo')
             @elseif($post->photos->count() > 1)
                 @include('posts.carousel-preview')
             @elseif($post->iframe)
                 @include('posts.iframe')
-            @endif 
-            
+            @endif --}}
+
             <div class="content-post">
                 
                 @include('posts.header')
