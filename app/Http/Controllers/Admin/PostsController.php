@@ -14,7 +14,12 @@ class PostsController extends Controller
 {
     public function index(){
 
-    	$posts = Post::all();
+        // Devuelve todos los registros
+        // $posts = Post::all();
+        
+        // Solo se va a cargar la informacion de usuario logueado
+        $posts = auth()->user()->posts;
+
     	return view('admin.posts.index', compact('posts'));
     }
 
@@ -27,6 +32,9 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
+        // crear el post mientras el usuario esta autenticado
+        $this->authorize('create', new Post);
+
         $this->validate($request, ['title' => 'required|min:3']);
 
         // $post = Post::create( $request->only('title') ); // Solo trae el atributo 'title' y los demas los ignora
@@ -42,13 +50,31 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
+        // Para invocar las politicas de acceso creadas en app/Policies/PostPolicy.php
+        // con el comando -- php artisan make:policy NombrePoliticaPolicy -m NombreModelo (la opcion del modelo en opcional pero se recomienda desde el principio definirla con el comando)
+        // el archivo creado con este comando se debe de registrar en -- App\Providers/AuthServiceProvider
+
+        // El metodo 'authorize' esta disponible en todos los controladores
+        // el primer parametro es la funcion a invocar (Accion) -- el segundo el modelo a validar
+        $this->authorize('view', $post);
+
+        return view('admin.posts.edit', [
+            'post' => $post,
+            'tags' => Tag::all(),
+            'categories' => Category::all()
+        ]);
     }
 
     public function update(Post $post, StorePostRequest $request)
     {
+        // Para invocar las politicas de acceso creadas en app/Policies/PostPolicy.php
+        // con el comando -- php artisan make:policy NombrePoliticaPolicy -m NombreModelo (la opcion del modelo en opcional pero se recomienda desde el principio definirla con el comando)
+        // el archivo creado con este comando se debe de registrar en -- App\Providers/AuthServiceProvider
+
+        // El metodo 'authorize' esta disponible en todos los controladores
+        // el primer parametro es la funcion a invocar (Accion) -- el segundo el modelo a validar
+        $this->authorize('update', $post);
+
         // Validacion
         // La validacion se realiza automaticamente desde la clase 'StorePostRequest'
         /* $this->validate($request, [
@@ -115,6 +141,14 @@ class PostsController extends Controller
     // Eliminar el posts y las realciones en las diferentes tablas
     public function destroy(Post $post)
     {
+        // Para invocar las politicas de acceso creadas en app/Policies/PostPolicy.php
+        // con el comando -- php artisan make:policy NombrePoliticaPolicy -m NombreModelo (la opcion del modelo en opcional pero se recomienda desde el principio definirla con el comando)
+        // el archivo creado con este comando se debe de registrar en -- App\Providers/AuthServiceProvider
+
+        // El metodo 'authorize' esta disponible en todos los controladores
+        // el primer parametro es la funcion a invocar (Accion) -- el segundo el modelo a validar
+        $this->authorize('delete', $post);
+
         // Elimina todos los Tags que esten relacionadas con el posts a eliminar
         // El metodo '->detach()' se encarga de ello
         // $post->tags()->detach(); 

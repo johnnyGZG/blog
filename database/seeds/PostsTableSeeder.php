@@ -98,7 +98,7 @@ class PostsTableSeeder extends Seeder
 
         $post->category_id = 2;
 
-        $post->user_id = 1;
+        $post->user_id = 2;
 
         $post->save();
 
@@ -119,7 +119,7 @@ class PostsTableSeeder extends Seeder
 
         $post->category_id = 2;
 
-        $post->user_id = 1;
+        $post->user_id = 2;
 
         $post->save();
 

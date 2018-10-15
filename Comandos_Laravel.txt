@@ -61,3 +61,8 @@ Para actualizar laravel
 
 Para volver a leer el archivo composer.json para aplicar cambios al proyecto
 	- composer dumpautoload -o
+
+Para crear politicas de acceso (Restringir accesos a la aplicacion a diferentes usuarios)
+	- php artisan make:policy NombrePoliticaPolicy
+	- php artisan make:policy NombrePoliticaPolicy -h (muestra las diferentes opciones del comando)
+	- php artisan make:policy NombrePoliticaPolicy -m NombreModelo
