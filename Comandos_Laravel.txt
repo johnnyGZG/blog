@@ -66,3 +66,6 @@ Para crear politicas de acceso (Restringir accesos a la aplicacion a diferentes 
 	- php artisan make:policy NombrePoliticaPolicy
 	- php artisan make:policy NombrePoliticaPolicy -h (muestra las diferentes opciones del comando)
 	- php artisan make:policy NombrePoliticaPolicy -m NombreModelo
+
+Para el manejo de roles de laravel
+	- Paquete mas recomendado - composer require spatie/laravel-permission - (https://github.com/spatie/laravel-permission#lumen)
