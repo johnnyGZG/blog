@@ -76,6 +76,23 @@ class Post extends Model
                         ->latest('published_at');
     }
 
+    // Definicion de query scope 
+    // siempre debe de iniciar con scopeNombreFuncion($query)
+    public function scopeAllowed($query)
+    {
+        // Verifica si el usuario logueado tiene asignado el rol Admin (esto devuelve ul resultado tipo boolean)
+        if( auth()->user()->hasRole('Admin') )
+        {
+            // Devuelve todos los registros
+            $posts = $query;
+        }
+        else
+        {
+            // Solo se va a cargar la informacion de usuario logueado
+            $posts = $query->where('user_id', auth()->id());
+        }
+    }
+
     public function isPublished()
     {
         // si tiene una fecha de publicacion definida y si en menor al dia actual devuelve true de lo contario false

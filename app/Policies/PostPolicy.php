@@ -10,6 +10,19 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
+    // este metodo se ejecuta antes de cualquier otra funcion de la clase 
+    // before es un metodo especial
+    public function before($user)
+    {
+        // Se premitira cualquier accion siempre y cuando el usuario logueado sea Admin
+        if( $user->hasRole('Admin') )
+        {
+            return true;
+        }
+
+        // No retornar false ya que al invocar cualquier otro metodo devolveria siembre falso
+    }
+
     /**
      * Determine whether the user can view the post.
      *

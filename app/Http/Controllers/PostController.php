@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 
 class PostController extends Controller
-{
+{ 
     // models buildings
     // Se pasa el modelo en los parametros de la funcion y busca el post de un id especifico
     // En donde se definen las rutas se debe de colocar el mismo nombre de variable

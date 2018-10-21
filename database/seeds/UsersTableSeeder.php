@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
+// Libreria para crear y asignar roles
+use Spatie\Permission\Models\Role;
+
 use App\User;
 
 class UsersTableSeeder extends Seeder
@@ -12,26 +16,32 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        // Se limpian las tablas
+        Role::truncate();
         User::truncate();
 
-        $user = new User();
+        // Se crean los Roles
+        $adminRole = Role::create(['name' => 'Admin']);
+        $writerRole = Role::create(['name' => 'Writer']);
 
-        $user->name = 'Administrador';
+        // Se crea el usuario admin
+        $admin = new User();
+        $admin->name = 'Administrador';
+        $admin->email = "pruebas@pruebas.com";
+        $admin->password = bcrypt('123123');
+        $admin->save();
 
-        $user->email = "pruebas@pruebas.com";
+        //Se asigna el rol creado al usuario admin
+        $admin->assignRole($adminRole);
 
-        $user->password = bcrypt('123123');
+        //Se crea el usuario escritor
+        $writer = new User();
+        $writer->name = 'Usuario 2';
+        $writer->email = "usuarioDos@pruebas.com";
+        $writer->password = bcrypt('123123');
+        $writer->save();
 
-        $user->save();
-
-        $user = new User();
-
-        $user->name = 'Usuario 2';
-
-        $user->email = "usuarioDos@pruebas.com";
-
-        $user->password = bcrypt('123123');
-
-        $user->save();
+        //Se asigna el rol creado al usuario escritor
+        $writer->assignRole($writerRole);
     }
 }

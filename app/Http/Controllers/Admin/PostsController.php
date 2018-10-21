@@ -12,13 +12,11 @@ use App\Http\Requests\StorePostRequest;
 
 class PostsController extends Controller
 {
-    public function index(){
-
-        // Devuelve todos los registros
-        // $posts = Post::all();
-        
-        // Solo se va a cargar la informacion de usuario logueado
-        $posts = auth()->user()->posts;
+    public function index()
+    {
+        // Metodo invocado desde el Modelo
+        // metodo scope para definir si ve toda la lista de Posts cuando es admin o solo los que ha publicado un escritor
+        $posts = Post::allowed()->get();
 
     	return view('admin.posts.index', compact('posts'));
     }
